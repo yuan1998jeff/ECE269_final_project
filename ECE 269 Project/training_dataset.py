@@ -28,9 +28,9 @@ class CityScapeTrainDataset(Dataset):
         img = np.array(cv2.imread(img_path))
         gt_path = os.path.join(self._train_gt_path, self._gt_names[index])
         gt = np.array(cv2.imread(gt_path))
-        img = torchvision.transforms.ToTensor(img)
-        gt = torchvision.transforms.ToTensor(gt)
-        return img, gt
+        #img = torchvision.transforms.functional.to_tensor(img)
+        #gt = torchvision.transforms.functional.to_tensor(gt)
+        return torch.to_tensor(img), torch.to_tensor(gt)
         
     def __len__(self):
         return len(self._img_names)
