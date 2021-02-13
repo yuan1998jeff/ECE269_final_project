@@ -3,6 +3,7 @@ import cv2
 import torchvision
 import numpy as np
 from torch.utils.data import Dataset
+import torch
 class CityScapeTrainDataset(Dataset):
     def __init__(self):
         super(CityScapeTrainDataset,self).__init__()
@@ -19,7 +20,7 @@ class CityScapeTrainDataset(Dataset):
                 if file.endswith('.png'):
                     self._img_names.append(os.path.join(city,file))
             for file in os.listdir(os.path.join(self._train_gt_path, city)):
-                if file.endswith('color.png'):
+                if file.endswith('labelIds.png'):
                     self._gt_names.append(os.path.join(city,file))
         self._img_names.sort()
         self._gt_names.sort()
@@ -27,10 +28,11 @@ class CityScapeTrainDataset(Dataset):
         img_path = os.path.join(self._train_img_path, self._img_names[index])
         img = np.array(cv2.imread(img_path))
         gt_path = os.path.join(self._train_gt_path, self._gt_names[index])
-        gt = np.array(cv2.imread(gt_path))
-        #img = torchvision.transforms.functional.to_tensor(img)
-        #gt = torchvision.transforms.functional.to_tensor(gt)
-        return torch.to_tensor(img), torch.to_tensor(gt)
+        gt = np.array(cv2.imread(gt_path, 0))
+        img = torchvision.transforms.functional.to_tensor(img)
+        gt = torchvision.transforms.functional.to_tensor(gt)
+        gt = gt*256
+        return img, gt.int()
         
     def __len__(self):
         return len(self._img_names)
