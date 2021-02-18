@@ -4,7 +4,12 @@ import torch.nn.functional as F
 import numpy as np
 from thop import profile
 import os.path as osp
-from ..utils.darts_utils import compute_latency_ms_pytorch as compute_latency
+import sys
+path = osp.realpath('.')
+root_path = osp.join(path,'utils')
+if root_path not in sys.path:
+    sys.path.insert(0,root_path)
+from utils.darts_utils import compute_latency_ms_pytorch as compute_latency
 
 latency_lookup_table = {}
 table_file_name = "latency_lookup_table.npy"
@@ -437,5 +442,12 @@ OPS_Class['conv_downup'] = BasicResidual_downup_1x
 OPS_Class['conv_2x'] = BasicResidual2x
 OPS_Class['conv_2x_downup'] = BasicResidual_downup_2x
 
+PRIMITIVES = [
+    'skip',
+    'conv',
+    'conv_downup',
+    'conv_2x',
+    'conv_2x_downup',
+]
 
 
