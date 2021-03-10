@@ -19,6 +19,95 @@ if osp.isfile(table_file_name):
 from slimmable_ops import USConv2d, USBatchNorm2d
 BatchNorm2d = nn.BatchNorm2d
 
+class ConvNorm(nn.Module):
+    '''
+    conv => norm => activation
+    use native nn.Conv2d, not slimmable
+    '''
+    def __init__(self, C_in, C_out, kernel_size=3, stride=1, padding=None, dilation=1, groups=1, bias=False, slimmable=True, width_mult_list=[1.]):
+        super(ConvNorm, self).__init__()
+        self.C_in = C_in
+        self.C_out = C_out
+        self.kernel_size = kernel_size
+        assert stride in [1, 2]
+        self.stride = stride
+        if padding is None:
+            # assume h_out = h_in / s
+            self.padding = int(np.ceil((dilation * (kernel_size - 1) + 1 - stride) / 2.))
+        else:
+            self.padding = padding
+        self.dilation = dilation
+        assert type(groups) == int
+        if kernel_size == 1:
+            self.groups = 1
+        else:
+            self.groups = groups
+        self.bias = bias
+        self.slimmable = slimmable
+        self.width_mult_list = width_mult_list
+        self.ratio = (1., 1.)
+
+        if slimmable:
+            self.conv = nn.Sequential(
+                USConv2d(C_in, C_out, kernel_size, stride, padding=self.padding, dilation=dilation, groups=self.groups, bias=bias, width_mult_list=width_mult_list),
+                USBatchNorm2d(C_out, width_mult_list),
+                nn.ReLU(inplace=True),
+            )
+        else:
+            self.conv = nn.Sequential(
+                nn.Conv2d(C_in, C_out, kernel_size, stride, padding=self.padding, dilation=dilation, groups=self.groups, bias=bias),
+                # nn.BatchNorm2d(C_out),
+                BatchNorm2d(C_out),
+                nn.ReLU(inplace=True),
+            )
+    
+    def set_ratio(self, ratio):
+        assert self.slimmable
+        assert len(ratio) == 2
+        self.ratio = ratio
+        self.conv[0].set_ratio(ratio)
+        self.conv[1].set_ratio(ratio[1])
+
+    @staticmethod
+    def _flops(h, w, C_in, C_out, kernel_size=3, stride=1, padding=None, dilation=1, groups=1, bias=False):
+        layer = ConvNorm(C_in, C_out, kernel_size, stride, padding, dilation, groups, bias, slimmable=False)
+        flops, params = profile(layer, inputs=(torch.randn(1, C_in, h, w),), verbose=False)
+        return flops
+    
+    @staticmethod
+    def _latency(h, w, C_in, C_out, kernel_size=3, stride=1, padding=None, dilation=1, groups=1, bias=False):
+        layer = ConvNorm(C_in, C_out, kernel_size, stride, padding, dilation, groups, bias, slimmable=False)
+        latency = compute_latency(layer, (1, C_in, h, w))
+        return latency
+
+    def forward_latency(self, size):
+        c_in, h_in, w_in = size
+        if self.slimmable:
+            assert c_in == int(self.C_in * self.ratio[0]), "c_in %d, self.C_in * self.ratio[0] %d"%(c_in, self.C_in * self.ratio[0])
+            c_out = int(self.C_out * self.ratio[1])
+        else:
+            assert c_in == self.C_in, "c_in %d, self.C_in %d"%(c_in, self.C_in)
+            c_out = self.C_out
+        if self.stride == 1:
+            h_out = h_in; w_out = w_in
+        else:
+            h_out = h_in // 2; w_out = w_in // 2
+        name = "ConvNorm_H%d_W%d_Cin%d_Cout%d_kernel%d_stride%d"%(h_in, w_in, c_in, c_out, self.kernel_size, self.stride)
+        if name in latency_lookup_table:
+            latency = latency_lookup_table[name]
+        else:
+            print("not found in latency_lookup_table:", name)
+            latency = ConvNorm._latency(h_in, w_in, c_in, c_out, self.kernel_size, self.stride, self.padding, self.dilation, self.groups, self.bias)
+            latency_lookup_table[name] = latency
+            np.save(table_file_name, latency_lookup_table)
+        return latency, (c_out, h_out, w_out)
+
+    def forward(self, x):
+        assert x.size()[1] == self.C_in, "{} {}".format(x.size()[1], self.C_in)
+        x = self.conv(x)
+        return x
+
+
 class BasicResidual1x(nn.Module):
     def __init__(self, C_in, C_out, kernel_size=3, stride=1, dilation=1, groups=1, slimmable=True, width_mult_list=[1.]):
         super(BasicResidual1x, self).__init__()
