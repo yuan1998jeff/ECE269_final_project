@@ -204,7 +204,7 @@ class Network_Multi_Path(nn.Module):
         return int(np.round(scale * self._Fch * width))
 
     def new(self):
-        model_new = Network(self._num_classes, self._layers, self._criterion, self._Fch).cuda()
+        model_new = Network_Multi_Path(self._num_classes, self._layers, self._criterion, self._Fch).cuda()
         for x, y in zip(model_new.arch_parameters(), self.arch_parameters()):
                 x.data.copy_(y.data)
         return model_new
@@ -345,9 +345,6 @@ class Network_Multi_Path(nn.Module):
         out2 = refine32[1](torch.cat([out2, out[1][0]], dim=1))
         out2 = F.interpolate(refine32[2](out2), scale_factor=2, mode='bilinear', align_corners=True)
         out2 = refine32[3](torch.cat([out2, out[0][0]], dim=1))
-        print(out0.size())
-        print(out1.size())
-        print(out2.size())
         pred0 = head0(out0)
         pred1 = head1(out1)
         pred2 = head2(out2)
