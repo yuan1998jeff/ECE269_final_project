@@ -95,6 +95,7 @@ class BaseDataset(data.Dataset):
         shuffle(files)
         for item in files:
             img_name, gt_name = self._process_item_names(item)
+            gt_name = gt_name.replace('Train','')
             file_names.append([img_name, gt_name])
 
         return file_names
