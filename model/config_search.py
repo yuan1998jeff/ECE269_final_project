@@ -16,7 +16,8 @@ cfg = C
 C.seed = 12345
 
 """please config ROOT_dir and user when u first using"""
-C.repo_name = 'ECE269_final_project'
+#C.repo_name = 'ECE269_final_project'
+C.repo_name = 'jif055'
 C.abs_dir = osp.realpath(".")
 C.this_dir = C.abs_dir.split(osp.sep)[-1]
 C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]
@@ -25,9 +26,9 @@ C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]
 C.dataset_path = "/datasets/cityscapes/"
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
-C.train_source = osp.join('tools', 'cityscapes', "cityscapes_train_fine.txt")
-C.eval_source = osp.join('tools', 'cityscapes', "cityscapes_val_fine.txt")
-C.test_source = osp.join('tools', 'cityscapes', "cityscapes_test.txt")
+C.train_source = osp.join('tools', 'datasets', 'cityscapes', "cityscapes_train_fine.txt")
+C.eval_source = osp.join('tools', 'datasets', 'cityscapes', "cityscapes_val_fine.txt")
+C.test_source = osp.join('tools', 'datasets', 'cityscapes', "cityscapes_test.txt")
 
 """Path Config"""
 def add_path(path):
@@ -36,7 +37,7 @@ def add_path(path):
 add_path(osp.join(C.root_dir,'model', 'tools'))
 
 """Image Config"""
-C.num_classes = 19
+C.num_classes = 35
 C.background = -1
 C.image_mean = np.array([0.485, 0.456, 0.406])
 C.image_std = np.array([0.229, 0.224, 0.225])
@@ -90,7 +91,7 @@ C.FPS_max = [0, 175.] # maximum FPS allowed for [teacher, student]
 #C.FPS_max = [0]
 if C.pretrain == True:
     C.batch_size = 3
-    #C.niters_per_epoch = max(C.num_train_imgs // 2 // C.batch_size, 400)
+    C.niters_per_epoch = max(C.num_train_imgs // 2 // C.batch_size, 400)
     C.lr = 2e-2
     C.latency_weight = [0, 0] # weight of latency penalty loss
     C.image_height = 256 # this size is after down_sampling
@@ -99,7 +100,7 @@ if C.pretrain == True:
     C.save = "pretrain-%dx%d_F%d.L%d_batch%d"%(C.image_height, C.image_width, C.Fch, C.layers, C.batch_size)
 else:
     C.batch_size = 2
-    #C.niters_per_epoch = max(C.num_train_imgs // 2 // C.batch_size, 400)
+    C.niters_per_epoch = max(C.num_train_imgs // 2 // C.batch_size, 400)
     C.latency_weight = [0, 1e-2,]
     C.image_height = 224 # this size is after down_sampling
     C.image_width = 224*2
