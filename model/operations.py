@@ -14,7 +14,11 @@ from utils.darts_utils import compute_latency_ms_pytorch as compute_latency
 latency_lookup_table = {}
 table_file_name = "latency_lookup_table.npy"
 if osp.isfile(table_file_name):
+<<<<<<< HEAD
     latency_lookup_table = np.load(table_file_name, allow_pickle=True).item()
+=======
+    latency_lookup_table = np.load(table_file_name).item()
+>>>>>>> b57fa0941e55c223def3cd8b98a93a43f745dd65
 
 from slimmable_ops import USConv2d, USBatchNorm2d
 BatchNorm2d = nn.BatchNorm2d

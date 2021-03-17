@@ -55,12 +55,16 @@ def main():
     flops, params = profile(model, inputs=(torch.randn(1, 3, 1024, 2048),), verbose=False)
     logging.info("params = %fMB, FLOPs = %fGB", params / 1e6, flops / 1e9)
     model = model.cuda()
+<<<<<<< HEAD
     #init_weight(model, nn.init.kaiming_normal_, nn.BatchNorm2d, config.bn_eps, config.bn_momentum, mode='fan_in', nonlinearity='relu')
     partial = torch.load('search-224x448_F12.L5_batch2-20210314-124411' + "/weights.pt", map_location='cuda:0')
     state = model.state_dict()
     pretrained_dict = {k: v for k, v in partial.items() if k in state and state[k].size() == partial[k].size()}
     state.update(pretrained_dict)
     model.load_state_dict(state)
+=======
+    init_weight(model, nn.init.kaiming_normal_, nn.BatchNorm2d, config.bn_eps, config.bn_momentum, mode='fan_in', nonlinearity='relu')
+>>>>>>> b57fa0941e55c223def3cd8b98a93a43f745dd65
     architect = Architect(model, config)
 
     # Set up dataloaders

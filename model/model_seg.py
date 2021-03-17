@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 from operations import *
+<<<<<<< HEAD
 from pdb import set_trace as bp
 from seg_oprs import FeatureFusion, Head
 
@@ -13,6 +14,12 @@ PRIMITIVES = [
     'conv_2x',
     'conv_2x_downup',
 ]
+=======
+from genotypes import PRIMITIVES
+from pdb import set_trace as bp
+from seg_oprs import FeatureFusion, Head
+
+>>>>>>> b57fa0941e55c223def3cd8b98a93a43f745dd65
 BatchNorm2d = nn.BatchNorm2d
 
 def softmax(x):
@@ -96,9 +103,13 @@ def alphas2ops_path_width(alphas, path, widths):
         path_compact.append(scale)
         if i < len(widths): widths_compact.append(width)
         ops.append(op)
+<<<<<<< HEAD
     #assert len(path_compact) >= min_len
     print(path_compact)
     print(min_len)
+=======
+    assert len(path_compact) >= min_len
+>>>>>>> b57fa0941e55c223def3cd8b98a93a43f745dd65
     return ops, path_compact, widths_compact
 
 def betas2path(betas, last, layers):
