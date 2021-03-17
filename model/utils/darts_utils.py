@@ -17,9 +17,9 @@ import warnings
 PRIMITIVES = [
     'skip',
     'conv',
-    'conv_di',
+    'conv_downup',
     'conv_2x',
-    'conv_2x_di',
+    'conv_2x_downup',
 ]
 class AvgrageMeter(object):
 

@@ -1,0 +1,412 @@
+2021-03-14 18:40:34,787 args = {'seed': 12345, 'repo_name': 'jif055', 'abs_dir': '/home/jif055/model', 'this_dir': 'model', 'root_dir': '/home/jif055', 'dataset_path': '/datasets/cityscapes/', 'img_root_folder': '/datasets/cityscapes/', 'gt_root_folder': '/datasets/cityscapes/', 'train_source': 'tools/datasets/cityscapes/cityscapes_train_fine.txt', 'eval_source': 'tools/datasets/cityscapes/cityscapes_val_fine.txt', 'test_source': 'tools/datasets/cityscapes/cityscapes_test.txt', 'num_classes': 35, 'background': -1, 'image_mean': array([0.485, 0.456, 0.406]), 'image_std': array([0.229, 0.224, 0.225]), 'down_sampling': 2, 'image_height': 224, 'image_width': 448, 'gt_down_sampling': 8, 'num_train_imgs': 2975, 'num_eval_imgs': 500, 'bn_eps': 1e-05, 'bn_momentum': 0.1, 'lr': 0.01, 'momentum': 0.9, 'weight_decay': 0.0005, 'num_workers': 4, 'train_scale_array': [0.75, 1, 1.25], 'eval_stride_rate': 0.8333333333333334, 'eval_scale_array': [1], 'eval_flip': False, 'eval_height': 1024, 'eval_width': 2048, 'grad_clip': 5, 'train_portion': 0.5, 'arch_learning_rate': 0.0003, 'arch_weight_decay': 0, 'layers': 5, 'branch': 2, 'pretrain': False, 'prun_modes': ['max', 'arch_ratio'], 'Fch': 12, 'width_mult_list': [0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0], 'stem_head_width': [(1, 1), (0.6666666666666666, 0.6666666666666666)], 'FPS_min': [0, 155.0], 'FPS_max': [0, 175.0], 'batch_size': 2, 'niters_per_epoch': 743, 'latency_weight': [0, 0.01], 'nepochs': 30, 'save': 'search-224x448_F12.L5_batch2-20210314-184032', 'unrolled': False}
+2021-03-14 18:40:47,097 params = 2.397823MB, FLOPs = 70.468076GB
+2021-03-14 18:40:56,949 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 18:40:56,949 lr: 0.01
+2021-03-14 19:19:02,358 Thread 0 handle 167 data.
+2021-03-14 19:19:02,360 Thread 1 handle 167 data.
+2021-03-14 19:19:02,360 Thread 2 handle 166 data.
+2021-03-14 19:20:54,404 Thread 0 handle 167 data.
+2021-03-14 19:20:54,405 Thread 1 handle 167 data.
+2021-03-14 19:20:54,405 Thread 2 handle 166 data.
+2021-03-14 19:22:42,395 Thread 0 handle 167 data.
+2021-03-14 19:22:42,396 Thread 1 handle 167 data.
+2021-03-14 19:22:42,396 Thread 2 handle 166 data.
+2021-03-14 19:24:21,231 Thread 0 handle 167 data.
+2021-03-14 19:24:21,232 Thread 1 handle 167 data.
+2021-03-14 19:24:21,232 Thread 2 handle 166 data.
+2021-03-14 19:26:05,192 Thread 0 handle 167 data.
+2021-03-14 19:26:05,193 Thread 1 handle 167 data.
+2021-03-14 19:26:05,193 Thread 2 handle 166 data.
+2021-03-14 19:27:45,955 Epoch 0: valid_mIoU_teacher_8s 0.178
+2021-03-14 19:27:46,013 Epoch 0: valid_mIoU_teacher_16s 0.185
+2021-03-14 19:27:46,013 Epoch 0: valid_mIoU_teacher_32s 0.185
+2021-03-14 19:27:46,014 Epoch 0: valid_mIoU_teacher_8s_32s 0.187
+2021-03-14 19:27:46,015 Epoch 0: valid_mIoU_teacher_16s_32s 0.190
+2021-03-14 19:27:46,034 Thread 0 handle 167 data.
+2021-03-14 19:27:46,034 Thread 1 handle 167 data.
+2021-03-14 19:27:46,034 Thread 2 handle 166 data.
+2021-03-14 19:29:22,227 Thread 0 handle 167 data.
+2021-03-14 19:29:22,228 Thread 1 handle 167 data.
+2021-03-14 19:29:22,228 Thread 2 handle 166 data.
+2021-03-14 19:30:58,855 Thread 0 handle 167 data.
+2021-03-14 19:30:58,856 Thread 1 handle 167 data.
+2021-03-14 19:30:58,856 Thread 2 handle 166 data.
+2021-03-14 19:32:29,588 Thread 0 handle 167 data.
+2021-03-14 19:32:29,589 Thread 1 handle 167 data.
+2021-03-14 19:32:29,589 Thread 2 handle 166 data.
+2021-03-14 19:34:02,061 Thread 0 handle 167 data.
+2021-03-14 19:34:02,062 Thread 1 handle 167 data.
+2021-03-14 19:34:02,062 Thread 2 handle 166 data.
+2021-03-14 19:35:36,557 Epoch 0: valid_mIoU_student_8s 0.182
+2021-03-14 19:35:36,568 Epoch 0: valid_mIoU_student_16s 0.192
+2021-03-14 19:35:36,568 Epoch 0: valid_mIoU_student_32s 0.186
+2021-03-14 19:35:36,569 Epoch 0: valid_mIoU_student_8s_32s 0.193
+2021-03-14 19:35:36,569 Epoch 0: valid_mIoU_student_16s_32s 0.195
+2021-03-14 19:35:36,569 Epoch 0: Objective_student_8s_32s 0.187
+2021-03-14 19:35:36,569 Epoch 0: Objective_student_16s_32s 0.190
+2021-03-14 19:35:37,409 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 19:35:37,409 lr: 0.00978
+2021-03-14 20:13:13,361 Thread 0 handle 167 data.
+2021-03-14 20:13:13,362 Thread 1 handle 167 data.
+2021-03-14 20:13:13,362 Thread 2 handle 166 data.
+2021-03-14 20:14:47,915 Thread 0 handle 167 data.
+2021-03-14 20:14:47,916 Thread 1 handle 167 data.
+2021-03-14 20:14:47,916 Thread 2 handle 166 data.
+2021-03-14 20:16:30,848 Thread 0 handle 167 data.
+2021-03-14 20:16:30,848 Thread 1 handle 167 data.
+2021-03-14 20:16:30,849 Thread 2 handle 166 data.
+2021-03-14 20:18:05,309 Thread 0 handle 167 data.
+2021-03-14 20:18:05,310 Thread 1 handle 167 data.
+2021-03-14 20:18:05,310 Thread 2 handle 166 data.
+2021-03-14 20:19:38,819 Thread 0 handle 167 data.
+2021-03-14 20:19:38,820 Thread 1 handle 167 data.
+2021-03-14 20:19:38,820 Thread 2 handle 166 data.
+2021-03-14 20:21:13,737 Epoch 1: valid_mIoU_teacher_8s 0.165
+2021-03-14 20:21:13,744 Epoch 1: valid_mIoU_teacher_16s 0.170
+2021-03-14 20:21:13,744 Epoch 1: valid_mIoU_teacher_32s 0.155
+2021-03-14 20:21:13,744 Epoch 1: valid_mIoU_teacher_8s_32s 0.158
+2021-03-14 20:21:13,745 Epoch 1: valid_mIoU_teacher_16s_32s 0.163
+2021-03-14 20:21:13,755 Thread 0 handle 167 data.
+2021-03-14 20:21:13,756 Thread 1 handle 167 data.
+2021-03-14 20:21:13,756 Thread 2 handle 166 data.
+2021-03-14 20:22:45,568 Thread 0 handle 167 data.
+2021-03-14 20:22:45,568 Thread 1 handle 167 data.
+2021-03-14 20:22:45,568 Thread 2 handle 166 data.
+2021-03-14 20:24:25,863 Thread 0 handle 167 data.
+2021-03-14 20:24:25,864 Thread 1 handle 167 data.
+2021-03-14 20:24:25,864 Thread 2 handle 166 data.
+2021-03-14 20:26:04,177 Thread 0 handle 167 data.
+2021-03-14 20:26:04,178 Thread 1 handle 167 data.
+2021-03-14 20:26:04,178 Thread 2 handle 166 data.
+2021-03-14 20:27:40,145 Thread 0 handle 167 data.
+2021-03-14 20:27:40,146 Thread 1 handle 167 data.
+2021-03-14 20:27:40,146 Thread 2 handle 166 data.
+2021-03-14 20:29:14,713 Epoch 1: valid_mIoU_student_8s 0.179
+2021-03-14 20:29:14,718 Epoch 1: valid_mIoU_student_16s 0.192
+2021-03-14 20:29:14,726 Epoch 1: valid_mIoU_student_32s 0.180
+2021-03-14 20:29:14,726 Epoch 1: valid_mIoU_student_8s_32s 0.180
+2021-03-14 20:29:14,727 Epoch 1: valid_mIoU_student_16s_32s 0.184
+2021-03-14 20:29:14,727 Epoch 1: Objective_student_8s_32s 0.174
+2021-03-14 20:29:14,727 Epoch 1: Objective_student_16s_32s 0.179
+2021-03-14 20:29:15,514 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 20:29:15,515 lr: 0.00956484
+2021-03-14 21:07:42,903 Thread 0 handle 167 data.
+2021-03-14 21:07:42,904 Thread 1 handle 167 data.
+2021-03-14 21:07:42,904 Thread 2 handle 166 data.
+2021-03-14 21:09:22,388 Thread 0 handle 167 data.
+2021-03-14 21:09:22,389 Thread 1 handle 167 data.
+2021-03-14 21:09:22,389 Thread 2 handle 166 data.
+2021-03-14 21:11:04,858 Thread 0 handle 167 data.
+2021-03-14 21:11:04,859 Thread 1 handle 167 data.
+2021-03-14 21:11:04,859 Thread 2 handle 166 data.
+2021-03-14 21:12:43,064 Thread 0 handle 167 data.
+2021-03-14 21:12:43,065 Thread 1 handle 167 data.
+2021-03-14 21:12:43,065 Thread 2 handle 166 data.
+2021-03-14 21:14:25,107 Thread 0 handle 167 data.
+2021-03-14 21:14:25,108 Thread 1 handle 167 data.
+2021-03-14 21:14:25,108 Thread 2 handle 166 data.
+2021-03-14 21:16:04,140 Epoch 2: valid_mIoU_teacher_8s 0.182
+2021-03-14 21:16:04,146 Epoch 2: valid_mIoU_teacher_16s 0.187
+2021-03-14 21:16:04,151 Epoch 2: valid_mIoU_teacher_32s 0.177
+2021-03-14 21:16:04,151 Epoch 2: valid_mIoU_teacher_8s_32s 0.180
+2021-03-14 21:16:04,152 Epoch 2: valid_mIoU_teacher_16s_32s 0.184
+2021-03-14 21:16:04,163 Thread 0 handle 167 data.
+2021-03-14 21:16:04,164 Thread 1 handle 167 data.
+2021-03-14 21:16:04,164 Thread 2 handle 166 data.
+2021-03-14 21:17:43,082 Thread 0 handle 167 data.
+2021-03-14 21:17:43,082 Thread 1 handle 167 data.
+2021-03-14 21:17:43,083 Thread 2 handle 166 data.
+2021-03-14 21:19:24,749 Thread 0 handle 167 data.
+2021-03-14 21:19:24,750 Thread 1 handle 167 data.
+2021-03-14 21:19:24,750 Thread 2 handle 166 data.
+2021-03-14 21:21:02,513 Thread 0 handle 167 data.
+2021-03-14 21:21:02,513 Thread 1 handle 167 data.
+2021-03-14 21:21:02,514 Thread 2 handle 166 data.
+2021-03-14 21:22:42,743 Thread 0 handle 167 data.
+2021-03-14 21:22:42,744 Thread 1 handle 167 data.
+2021-03-14 21:22:42,744 Thread 2 handle 166 data.
+2021-03-14 21:24:22,873 Epoch 2: valid_mIoU_student_8s 0.185
+2021-03-14 21:24:22,883 Epoch 2: valid_mIoU_student_16s 0.195
+2021-03-14 21:24:22,883 Epoch 2: valid_mIoU_student_32s 0.183
+2021-03-14 21:24:22,884 Epoch 2: valid_mIoU_student_8s_32s 0.193
+2021-03-14 21:24:22,884 Epoch 2: valid_mIoU_student_16s_32s 0.195
+2021-03-14 21:24:22,884 Epoch 2: Objective_student_8s_32s 0.187
+2021-03-14 21:24:22,884 Epoch 2: Objective_student_16s_32s 0.190
+2021-03-14 21:24:24,115 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 21:24:24,115 lr: 0.009354413519999999
+2021-03-14 22:03:41,090 Thread 0 handle 167 data.
+2021-03-14 22:03:41,091 Thread 1 handle 167 data.
+2021-03-14 22:03:41,091 Thread 2 handle 166 data.
+2021-03-14 22:05:23,974 Thread 0 handle 167 data.
+2021-03-14 22:05:23,975 Thread 1 handle 167 data.
+2021-03-14 22:05:23,975 Thread 2 handle 166 data.
+2021-03-14 22:07:01,625 Thread 0 handle 167 data.
+2021-03-14 22:07:01,626 Thread 1 handle 167 data.
+2021-03-14 22:07:01,626 Thread 2 handle 166 data.
+2021-03-14 22:08:40,087 Thread 0 handle 167 data.
+2021-03-14 22:08:40,088 Thread 1 handle 167 data.
+2021-03-14 22:08:40,088 Thread 2 handle 166 data.
+2021-03-14 22:10:21,529 Thread 0 handle 167 data.
+2021-03-14 22:10:21,529 Thread 1 handle 167 data.
+2021-03-14 22:10:21,530 Thread 2 handle 166 data.
+2021-03-14 22:12:00,026 Epoch 3: valid_mIoU_teacher_8s 0.169
+2021-03-14 22:12:00,038 Epoch 3: valid_mIoU_teacher_16s 0.174
+2021-03-14 22:12:00,042 Epoch 3: valid_mIoU_teacher_32s 0.161
+2021-03-14 22:12:00,042 Epoch 3: valid_mIoU_teacher_8s_32s 0.163
+2021-03-14 22:12:00,043 Epoch 3: valid_mIoU_teacher_16s_32s 0.166
+2021-03-14 22:12:00,056 Thread 0 handle 167 data.
+2021-03-14 22:12:00,056 Thread 1 handle 167 data.
+2021-03-14 22:12:00,056 Thread 2 handle 166 data.
+2021-03-14 22:13:40,590 Thread 0 handle 167 data.
+2021-03-14 22:13:40,591 Thread 1 handle 167 data.
+2021-03-14 22:13:40,591 Thread 2 handle 166 data.
+2021-03-14 22:15:22,809 Thread 0 handle 167 data.
+2021-03-14 22:15:22,810 Thread 1 handle 167 data.
+2021-03-14 22:15:22,810 Thread 2 handle 166 data.
+2021-03-14 22:17:00,115 Thread 0 handle 167 data.
+2021-03-14 22:17:00,116 Thread 1 handle 167 data.
+2021-03-14 22:17:00,116 Thread 2 handle 166 data.
+2021-03-14 22:18:40,174 Thread 0 handle 167 data.
+2021-03-14 22:18:40,175 Thread 1 handle 167 data.
+2021-03-14 22:18:40,175 Thread 2 handle 166 data.
+2021-03-14 22:20:25,245 Epoch 3: valid_mIoU_student_8s 0.183
+2021-03-14 22:20:25,255 Epoch 3: valid_mIoU_student_16s 0.185
+2021-03-14 22:20:25,256 Epoch 3: valid_mIoU_student_32s 0.186
+2021-03-14 22:20:25,256 Epoch 3: valid_mIoU_student_8s_32s 0.189
+2021-03-14 22:20:25,257 Epoch 3: valid_mIoU_student_16s_32s 0.188
+2021-03-14 22:20:25,257 Epoch 3: Objective_student_8s_32s 0.183
+2021-03-14 22:20:25,257 Epoch 3: Objective_student_16s_32s 0.183
+2021-03-14 22:20:26,163 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 22:20:26,163 lr: 0.00914861642256
+2021-03-14 23:00:28,871 Thread 0 handle 167 data.
+2021-03-14 23:00:28,872 Thread 1 handle 167 data.
+2021-03-14 23:00:28,872 Thread 2 handle 166 data.
+2021-03-14 23:02:16,338 Thread 0 handle 167 data.
+2021-03-14 23:02:16,339 Thread 1 handle 167 data.
+2021-03-14 23:02:16,339 Thread 2 handle 166 data.
+2021-03-14 23:04:18,731 Thread 0 handle 167 data.
+2021-03-14 23:04:18,732 Thread 1 handle 167 data.
+2021-03-14 23:04:18,732 Thread 2 handle 166 data.
+2021-03-14 23:07:10,415 Thread 0 handle 167 data.
+2021-03-14 23:07:10,415 Thread 1 handle 167 data.
+2021-03-14 23:07:10,415 Thread 2 handle 166 data.
+2021-03-14 23:09:57,438 Thread 0 handle 167 data.
+2021-03-14 23:09:57,439 Thread 1 handle 167 data.
+2021-03-14 23:09:57,439 Thread 2 handle 166 data.
+2021-03-14 23:12:27,074 Epoch 4: valid_mIoU_teacher_8s 0.186
+2021-03-14 23:12:27,080 Epoch 4: valid_mIoU_teacher_16s 0.195
+2021-03-14 23:12:27,080 Epoch 4: valid_mIoU_teacher_32s 0.190
+2021-03-14 23:12:27,080 Epoch 4: valid_mIoU_teacher_8s_32s 0.192
+2021-03-14 23:12:27,080 Epoch 4: valid_mIoU_teacher_16s_32s 0.196
+2021-03-14 23:12:27,092 Thread 0 handle 167 data.
+2021-03-14 23:12:27,092 Thread 1 handle 167 data.
+2021-03-14 23:12:27,092 Thread 2 handle 166 data.
+2021-03-14 23:15:04,388 Thread 0 handle 167 data.
+2021-03-14 23:15:04,389 Thread 1 handle 167 data.
+2021-03-14 23:15:04,389 Thread 2 handle 166 data.
+2021-03-14 23:17:12,343 Thread 0 handle 167 data.
+2021-03-14 23:17:12,344 Thread 1 handle 167 data.
+2021-03-14 23:17:12,344 Thread 2 handle 166 data.
+2021-03-14 23:19:21,739 Thread 0 handle 167 data.
+2021-03-14 23:19:21,741 Thread 1 handle 167 data.
+2021-03-14 23:19:21,742 Thread 2 handle 166 data.
+2021-03-14 23:21:57,129 Thread 0 handle 167 data.
+2021-03-14 23:21:57,130 Thread 1 handle 167 data.
+2021-03-14 23:21:57,130 Thread 2 handle 166 data.
+2021-03-14 23:24:09,526 Epoch 4: valid_mIoU_student_8s 0.191
+2021-03-14 23:24:09,537 Epoch 4: valid_mIoU_student_16s 0.206
+2021-03-14 23:24:09,538 Epoch 4: valid_mIoU_student_32s 0.200
+2021-03-14 23:24:09,538 Epoch 4: valid_mIoU_student_8s_32s 0.203
+2021-03-14 23:24:09,539 Epoch 4: valid_mIoU_student_16s_32s 0.202
+2021-03-14 23:24:09,539 Epoch 4: Objective_student_8s_32s 0.197
+2021-03-14 23:24:09,539 Epoch 4: Objective_student_16s_32s 0.196
+2021-03-14 23:24:10,389 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-14 23:24:10,390 lr: 0.008947346861263679
+2021-03-15 00:03:18,755 Thread 0 handle 167 data.
+2021-03-15 00:03:18,757 Thread 1 handle 167 data.
+2021-03-15 00:03:18,757 Thread 2 handle 166 data.
+2021-03-15 00:05:28,511 Thread 0 handle 167 data.
+2021-03-15 00:05:28,512 Thread 1 handle 167 data.
+2021-03-15 00:05:28,512 Thread 2 handle 166 data.
+2021-03-15 00:07:51,862 Thread 0 handle 167 data.
+2021-03-15 00:07:51,863 Thread 1 handle 167 data.
+2021-03-15 00:07:51,863 Thread 2 handle 166 data.
+2021-03-15 00:10:09,164 Thread 0 handle 167 data.
+2021-03-15 00:10:09,165 Thread 1 handle 167 data.
+2021-03-15 00:10:09,165 Thread 2 handle 166 data.
+2021-03-15 00:12:14,351 Thread 0 handle 167 data.
+2021-03-15 00:12:14,352 Thread 1 handle 167 data.
+2021-03-15 00:12:14,352 Thread 2 handle 166 data.
+2021-03-15 00:14:31,173 Epoch 5: valid_mIoU_teacher_8s 0.190
+2021-03-15 00:14:31,183 Epoch 5: valid_mIoU_teacher_16s 0.199
+2021-03-15 00:14:31,183 Epoch 5: valid_mIoU_teacher_32s 0.193
+2021-03-15 00:14:31,183 Epoch 5: valid_mIoU_teacher_8s_32s 0.196
+2021-03-15 00:14:31,183 Epoch 5: valid_mIoU_teacher_16s_32s 0.200
+2021-03-15 00:14:31,194 Thread 0 handle 167 data.
+2021-03-15 00:14:31,195 Thread 1 handle 167 data.
+2021-03-15 00:14:31,195 Thread 2 handle 166 data.
+2021-03-15 00:16:59,855 Thread 0 handle 167 data.
+2021-03-15 00:16:59,855 Thread 1 handle 167 data.
+2021-03-15 00:16:59,855 Thread 2 handle 166 data.
+2021-03-15 00:19:17,488 Thread 0 handle 167 data.
+2021-03-15 00:19:17,488 Thread 1 handle 167 data.
+2021-03-15 00:19:17,488 Thread 2 handle 166 data.
+2021-03-15 00:21:25,141 Thread 0 handle 167 data.
+2021-03-15 00:21:25,142 Thread 1 handle 167 data.
+2021-03-15 00:21:25,142 Thread 2 handle 166 data.
+2021-03-15 00:23:55,537 Thread 0 handle 167 data.
+2021-03-15 00:23:55,538 Thread 1 handle 167 data.
+2021-03-15 00:23:55,538 Thread 2 handle 166 data.
+2021-03-15 00:26:11,586 Epoch 5: valid_mIoU_student_8s 0.190
+2021-03-15 00:26:11,592 Epoch 5: valid_mIoU_student_16s 0.197
+2021-03-15 00:26:11,598 Epoch 5: valid_mIoU_student_32s 0.192
+2021-03-15 00:26:11,599 Epoch 5: valid_mIoU_student_8s_32s 0.193
+2021-03-15 00:26:11,599 Epoch 5: valid_mIoU_student_16s_32s 0.196
+2021-03-15 00:26:11,599 Epoch 5: Objective_student_8s_32s 0.186
+2021-03-15 00:26:11,600 Epoch 5: Objective_student_16s_32s 0.190
+2021-03-15 00:26:12,502 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-15 00:26:12,503 lr: 0.008750505230315878
+2021-03-15 01:06:39,430 Thread 0 handle 167 data.
+2021-03-15 01:06:39,431 Thread 1 handle 167 data.
+2021-03-15 01:06:39,431 Thread 2 handle 166 data.
+2021-03-15 01:10:19,357 Thread 0 handle 167 data.
+2021-03-15 01:10:19,357 Thread 1 handle 167 data.
+2021-03-15 01:10:19,357 Thread 2 handle 166 data.
+2021-03-15 01:13:24,101 Thread 0 handle 167 data.
+2021-03-15 01:13:24,102 Thread 1 handle 167 data.
+2021-03-15 01:13:24,102 Thread 2 handle 166 data.
+2021-03-15 01:16:30,810 Thread 0 handle 167 data.
+2021-03-15 01:16:30,811 Thread 1 handle 167 data.
+2021-03-15 01:16:30,811 Thread 2 handle 166 data.
+2021-03-15 01:19:23,411 Thread 0 handle 167 data.
+2021-03-15 01:19:23,412 Thread 1 handle 167 data.
+2021-03-15 01:19:23,412 Thread 2 handle 166 data.
+2021-03-15 01:22:19,665 Epoch 6: valid_mIoU_teacher_8s 0.171
+2021-03-15 01:22:19,671 Epoch 6: valid_mIoU_teacher_16s 0.172
+2021-03-15 01:22:19,671 Epoch 6: valid_mIoU_teacher_32s 0.167
+2021-03-15 01:22:19,671 Epoch 6: valid_mIoU_teacher_8s_32s 0.170
+2021-03-15 01:22:19,672 Epoch 6: valid_mIoU_teacher_16s_32s 0.172
+2021-03-15 01:22:19,679 Thread 0 handle 167 data.
+2021-03-15 01:22:19,679 Thread 1 handle 167 data.
+2021-03-15 01:22:19,679 Thread 2 handle 166 data.
+2021-03-15 01:25:21,247 Thread 0 handle 167 data.
+2021-03-15 01:25:21,247 Thread 1 handle 167 data.
+2021-03-15 01:25:21,247 Thread 2 handle 166 data.
+2021-03-15 01:28:30,078 Thread 0 handle 167 data.
+2021-03-15 01:28:30,079 Thread 1 handle 167 data.
+2021-03-15 01:28:30,079 Thread 2 handle 166 data.
+2021-03-15 01:31:35,061 Thread 0 handle 167 data.
+2021-03-15 01:31:35,061 Thread 1 handle 167 data.
+2021-03-15 01:31:35,062 Thread 2 handle 166 data.
+2021-03-15 01:34:29,131 Thread 0 handle 167 data.
+2021-03-15 01:34:29,132 Thread 1 handle 167 data.
+2021-03-15 01:34:29,132 Thread 2 handle 166 data.
+2021-03-15 01:37:32,614 Epoch 6: valid_mIoU_student_8s 0.200
+2021-03-15 01:37:32,620 Epoch 6: valid_mIoU_student_16s 0.208
+2021-03-15 01:37:32,621 Epoch 6: valid_mIoU_student_32s 0.199
+2021-03-15 01:37:32,621 Epoch 6: valid_mIoU_student_8s_32s 0.197
+2021-03-15 01:37:32,621 Epoch 6: valid_mIoU_student_16s_32s 0.206
+2021-03-15 01:37:32,622 Epoch 6: Objective_student_8s_32s 0.191
+2021-03-15 01:37:32,622 Epoch 6: Objective_student_16s_32s 0.200
+2021-03-15 01:37:33,494 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-15 01:37:33,495 lr: 0.008557994115248928
+2021-03-15 02:19:59,124 Thread 0 handle 167 data.
+2021-03-15 02:19:59,124 Thread 1 handle 167 data.
+2021-03-15 02:19:59,125 Thread 2 handle 166 data.
+2021-03-15 02:23:17,402 Thread 0 handle 167 data.
+2021-03-15 02:23:17,402 Thread 1 handle 167 data.
+2021-03-15 02:23:17,403 Thread 2 handle 166 data.
+2021-03-15 02:26:25,664 Thread 0 handle 167 data.
+2021-03-15 02:26:25,665 Thread 1 handle 167 data.
+2021-03-15 02:26:25,665 Thread 2 handle 166 data.
+2021-03-15 02:28:13,375 Thread 0 handle 167 data.
+2021-03-15 02:28:13,376 Thread 1 handle 167 data.
+2021-03-15 02:28:13,376 Thread 2 handle 166 data.
+2021-03-15 02:29:56,646 Thread 0 handle 167 data.
+2021-03-15 02:29:56,647 Thread 1 handle 167 data.
+2021-03-15 02:29:56,647 Thread 2 handle 166 data.
+2021-03-15 02:32:49,806 Epoch 7: valid_mIoU_teacher_8s 0.206
+2021-03-15 02:32:49,812 Epoch 7: valid_mIoU_teacher_16s 0.213
+2021-03-15 02:32:49,812 Epoch 7: valid_mIoU_teacher_32s 0.206
+2021-03-15 02:32:49,812 Epoch 7: valid_mIoU_teacher_8s_32s 0.209
+2021-03-15 02:32:49,813 Epoch 7: valid_mIoU_teacher_16s_32s 0.210
+2021-03-15 02:32:49,823 Thread 0 handle 167 data.
+2021-03-15 02:32:49,823 Thread 1 handle 167 data.
+2021-03-15 02:32:49,823 Thread 2 handle 166 data.
+2021-03-15 02:35:34,608 Thread 0 handle 167 data.
+2021-03-15 02:35:34,608 Thread 1 handle 167 data.
+2021-03-15 02:35:34,608 Thread 2 handle 166 data.
+2021-03-15 02:38:20,709 Thread 0 handle 167 data.
+2021-03-15 02:38:20,710 Thread 1 handle 167 data.
+2021-03-15 02:38:20,710 Thread 2 handle 166 data.
+2021-03-15 02:41:33,179 Thread 0 handle 167 data.
+2021-03-15 02:41:33,179 Thread 1 handle 167 data.
+2021-03-15 02:41:33,179 Thread 2 handle 166 data.
+2021-03-15 02:44:47,431 Thread 0 handle 167 data.
+2021-03-15 02:44:47,431 Thread 1 handle 167 data.
+2021-03-15 02:44:47,432 Thread 2 handle 166 data.
+2021-03-15 02:47:35,580 Epoch 7: valid_mIoU_student_8s 0.197
+2021-03-15 02:47:35,591 Epoch 7: valid_mIoU_student_16s 0.207
+2021-03-15 02:47:35,591 Epoch 7: valid_mIoU_student_32s 0.201
+2021-03-15 02:47:35,591 Epoch 7: valid_mIoU_student_8s_32s 0.204
+2021-03-15 02:47:35,592 Epoch 7: valid_mIoU_student_16s_32s 0.208
+2021-03-15 02:47:35,592 Epoch 7: Objective_student_8s_32s 0.197
+2021-03-15 02:47:35,592 Epoch 7: Objective_student_16s_32s 0.202
+2021-03-15 02:47:36,417 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-15 02:47:36,418 lr: 0.008369718244713453
+2021-03-15 03:29:50,686 Thread 0 handle 167 data.
+2021-03-15 03:29:50,686 Thread 1 handle 167 data.
+2021-03-15 03:29:50,687 Thread 2 handle 166 data.
+2021-03-15 03:33:29,243 Thread 0 handle 167 data.
+2021-03-15 03:33:29,244 Thread 1 handle 167 data.
+2021-03-15 03:33:29,244 Thread 2 handle 166 data.
+2021-03-15 03:36:36,125 Thread 0 handle 167 data.
+2021-03-15 03:36:36,126 Thread 1 handle 167 data.
+2021-03-15 03:36:36,126 Thread 2 handle 166 data.
+2021-03-15 03:39:38,955 Thread 0 handle 167 data.
+2021-03-15 03:39:38,956 Thread 1 handle 167 data.
+2021-03-15 03:39:38,956 Thread 2 handle 166 data.
+2021-03-15 03:41:50,208 Thread 0 handle 167 data.
+2021-03-15 03:41:50,209 Thread 1 handle 167 data.
+2021-03-15 03:41:50,209 Thread 2 handle 166 data.
+2021-03-15 03:43:59,183 Epoch 8: valid_mIoU_teacher_8s 0.199
+2021-03-15 03:43:59,194 Epoch 8: valid_mIoU_teacher_16s 0.213
+2021-03-15 03:43:59,195 Epoch 8: valid_mIoU_teacher_32s 0.197
+2021-03-15 03:43:59,195 Epoch 8: valid_mIoU_teacher_8s_32s 0.202
+2021-03-15 03:43:59,195 Epoch 8: valid_mIoU_teacher_16s_32s 0.208
+2021-03-15 03:43:59,204 Thread 0 handle 167 data.
+2021-03-15 03:43:59,204 Thread 1 handle 167 data.
+2021-03-15 03:43:59,204 Thread 2 handle 166 data.
+2021-03-15 03:46:15,857 Thread 0 handle 167 data.
+2021-03-15 03:46:15,857 Thread 1 handle 167 data.
+2021-03-15 03:46:15,858 Thread 2 handle 166 data.
+2021-03-15 03:48:39,280 Thread 0 handle 167 data.
+2021-03-15 03:48:39,281 Thread 1 handle 167 data.
+2021-03-15 03:48:39,281 Thread 2 handle 166 data.
+2021-03-15 03:51:11,041 Thread 0 handle 167 data.
+2021-03-15 03:51:11,042 Thread 1 handle 167 data.
+2021-03-15 03:51:11,042 Thread 2 handle 166 data.
+2021-03-15 03:54:18,044 Thread 0 handle 167 data.
+2021-03-15 03:54:18,045 Thread 1 handle 167 data.
+2021-03-15 03:54:18,045 Thread 2 handle 166 data.
+2021-03-15 03:55:58,516 Epoch 8: valid_mIoU_student_8s 0.204
+2021-03-15 03:55:58,517 Epoch 8: valid_mIoU_student_16s 0.222
+2021-03-15 03:55:58,517 Epoch 8: valid_mIoU_student_32s 0.201
+2021-03-15 03:55:58,518 Epoch 8: valid_mIoU_student_8s_32s 0.205
+2021-03-15 03:55:58,518 Epoch 8: valid_mIoU_student_16s_32s 0.214
+2021-03-15 03:55:58,518 Epoch 8: Objective_student_8s_32s 0.199
+2021-03-15 03:55:58,518 Epoch 8: Objective_student_16s_32s 0.208
+2021-03-15 03:55:59,389 search-224x448_F12.L5_batch2-20210314-184032
+2021-03-15 03:55:59,389 lr: 0.008185584443329756
+2021-03-15 04:39:47,145 Thread 0 handle 167 data.
+2021-03-15 04:39:47,146 Thread 1 handle 167 data.
+2021-03-15 04:39:47,146 Thread 2 handle 166 data.
+2021-03-15 04:42:47,058 Thread 0 handle 167 data.
+2021-03-15 04:42:47,059 Thread 1 handle 167 data.
+2021-03-15 04:42:47,060 Thread 2 handle 166 data.
+2021-03-15 04:45:48,538 Thread 0 handle 167 data.
+2021-03-15 04:45:48,539 Thread 1 handle 167 data.
+2021-03-15 04:45:48,539 Thread 2 handle 166 data.
+2021-03-15 04:48:51,252 Thread 0 handle 167 data.
+2021-03-15 04:48:51,253 Thread 1 handle 167 data.
+2021-03-15 04:48:51,253 Thread 2 handle 166 data.
