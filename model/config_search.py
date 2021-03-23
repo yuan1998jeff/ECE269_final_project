@@ -16,8 +16,8 @@ cfg = C
 C.seed = 12345
 
 """please config ROOT_dir and user when u first using"""
-#C.repo_name = 'ECE269_final_project'
-C.repo_name = 'jif055'
+C.repo_name = 'ECE269_final_project'
+#C.repo_name = 'jif055'
 C.abs_dir = osp.realpath(".")
 C.this_dir = C.abs_dir.split(osp.sep)[-1]
 C.root_dir = C.abs_dir[:C.abs_dir.index(C.repo_name) + len(C.repo_name)]

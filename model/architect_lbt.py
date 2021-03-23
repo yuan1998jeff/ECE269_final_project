@@ -4,9 +4,18 @@ import torch.nn as nn
 from torch.autograd import Variable
 
 
+def _concat_1(xs, model):
+    tensor_list = []
+    params = model.parameters()
+    for x in xs:
+        zero_tensor = torch.zeros_like(next(params))
+        if x is None:
+            tensor_list.append(zero_tensor)
+        else:
+            tensor_list.append(x)
+    return torch.cat([x.view(-1) for x in tensor_list])
 def _concat(xs):
     return torch.cat([x.view(-1) for x in xs])
-
 def cusloss(inp, tar):
     m = nn.Softmax(1)
     lm = nn.LogSoftmax(1)
@@ -37,14 +46,18 @@ class Architect(object):
             moment = _concat(network_optimizer.state[v]['momentum_buffer'] for v in self.model.parameters()).mul_(self.network_momentum)
         except:
             moment = torch.zeros_like(theta)
-        dtheta = _concat(torch.autograd.grad(loss, self.model.parameters())).data + self.network_weight_decay*theta
+        dtheta = _concat_1(torch.autograd.grad(loss, self.model.parameters(),allow_unused=True),self.model).data + self.network_weight_decay*theta
         unrolled_model = self._construct_model_from_theta(theta.sub(eta, moment+dtheta))
         return unrolled_model
 
     def _compute_unrolled_model1(self, input, target, eta, unrolled_model, input_unlabeled, student_optimizer):
         loss1 = self.student._loss(input, target)
         l1 = self.model(input_unlabeled)
-        tar_unlabeled = l1.argmax(1)
+        pred = torch.zeros_like(l1[0])
+        for l in l1:
+            pred = pred + l
+        pred = pred / 5
+        tar_unlabeled = pred.argmax(1)
         logits1 = self.student(input_unlabeled)
         crit = nn.CrossEntropyLoss()
         loss2 = crit(logits1, tar_unlabeled.detach())
@@ -54,7 +67,7 @@ class Architect(object):
             moment = _concat(student_optimizer.state[v]['momentum_buffer'] for v in self.student.parameters()).mul_(self.network_momentum)
         except:
             moment = torch.zeros_like(theta)
-        dtheta = _concat(torch.autograd.grad(loss, self.student.parameters())).data + self.network_weight_decay*theta
+        dtheta = _concat_1(torch.autograd.grad(loss, self.student.parameters(),allow_unused=True),self.student).data + self.network_weight_decay*theta
         unrolled_student = self._construct_model_from_theta1(theta.sub(eta, moment+dtheta))
         return unrolled_student
 
@@ -97,8 +110,20 @@ class Architect(object):
         unrolled_loss = unrolled_model._loss(input_valid, target_valid)
 
         unrolled_loss.backward()
-        dalpha = [v.grad for v in unrolled_model.arch_parameters()]
-        vector = [v.grad.data for v in unrolled_model.parameters()]
+        #dalpha = [v.grad for v in unrolled_model.arch_parameters()]
+        #vector = [v.grad.data for v in unrolled_model.parameters()]
+        dalpha = []
+        for v in unrolled_model.arch_parameters():
+            if v.grad is None:
+                dalpha.append(torch.zeros_like(v))
+            else:
+                dalpha.append(v.grad)
+        vector = []
+        for v in unrolled_model.parameters():
+            if v.grad is None:
+                vector.append(torch.zeros_like(v))
+            else:
+                vector.append(v.grad)
         implicit_grads = self._hessian_vector_product(vector, input_train, target_train)
 
         for g, ig in zip(dalpha, implicit_grads):
@@ -145,17 +170,29 @@ class Architect(object):
         for p, v in zip(self.model.parameters(), vector):
             p.data.add_(R, v)
         loss = self.model._loss(input, target)
-        grads_p = torch.autograd.grad(loss, self.model.arch_parameters())
+        grads_p = torch.autograd.grad(loss, self.model.arch_parameters(),allow_unused=True)
 
         for p, v in zip(self.model.parameters(), vector):
             p.data.sub_(2*R, v)
         loss = self.model._loss(input, target)
-        grads_n = torch.autograd.grad(loss, self.model.arch_parameters())
+        grads_n = torch.autograd.grad(loss, self.model.arch_parameters(),allow_unused=True)
 
         for p, v in zip(self.model.parameters(), vector):
             p.data.add_(R, v)
-
-        return [(x-y).div_(2*R) for x, y in zip(grads_p, grads_n)]
+        arch_params = self.model.arch_parameters()
+        grads_p_list = []
+        for i in range(len(grads_p)):
+            if grads_p[i] is None:
+                grads_p_list.append(torch.zeros_like(arch_params[i]))
+            else:
+                grads_p_list.append(grads_p[i])
+        grads_n_list = []
+        for i in range(len(grads_n)):          
+            if grads_n[i] is None:
+                grads_n_list.append(torch.zeros_like(arch_params[i]))
+            else:
+                grads_n_list.append(grads_n[i])
+        return [(x-y).div_(2*R) for x, y in zip(grads_p_list, grads_n_list)]
 
     def _outer1(self, vector_s_dash, input_train, target_train, input_unlabeled, unrolled_model, eta, r=1e-2):
         R1 = r / _concat(vector_s_dash).norm()
@@ -163,18 +200,44 @@ class Architect(object):
             p.data.add_(R1, v)
         logits1 = self.student(input_unlabeled)
         logits2 = unrolled_model(input_unlabeled)
+        pred = torch.zeros_like(logits2[0])
+        for l in logits2:
+            pred = pred + l
+        logits2 = pred / 5
         loss1 = cusloss(logits1, logits2)
 
-        vector_t_dash = torch.autograd.grad(loss1, unrolled_model.parameters())
+        vector_t_dash = torch.autograd.grad(loss1, unrolled_model.parameters(),allow_unused=True)
+        params = unrolled_model.parameters()
+        tensor_list = []
+        for v in vector_t_dash:
+            zero_tensor = torch.zeros_like(next(params))
+            if v is None:
+                tensor_list.append(zero_tensor)
+            else:
+                tensor_list.append(v)
+        vector_t_dash = tensor_list
         grad_part1 = self._hessian_vector_product(vector_t_dash, input_train, target_train)
 
         for p, v in zip(self.student.parameters(), vector_s_dash):
             p.data.sub_(2*R1, v)
         logits1 = self.student(input_unlabeled)
         logits2 = unrolled_model(input_unlabeled)
+        pred = torch.zeros_like(logits2[0])
+        for l in logits2:
+            pred = pred + l
+        logits2 = pred / 5
         loss2 = cusloss(logits1, logits2)
 
-        vector_t_dash = torch.autograd.grad(loss2, unrolled_model.parameters())
+        vector_t_dash = torch.autograd.grad(loss2, unrolled_model.parameters(),allow_unused=True)
+        params = unrolled_model.parameters()
+        tensor_list = []
+        for v in vector_t_dash:
+            zero_tensor = torch.zeros_like(next(params))
+            if v is None:
+                tensor_list.append(zero_tensor)
+            else:
+                tensor_list.append(v)
+        vector_t_dash = tensor_list
         grad_part2 = self._hessian_vector_product(vector_t_dash, input_train, target_train)
 
         for p, v in zip(self.student.parameters(), vector_s_dash):

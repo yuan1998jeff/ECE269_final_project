@@ -204,7 +204,7 @@ class Network_Multi_Path(nn.Module):
         return int(np.round(scale * self._Fch * width))
 
     def new(self):
-        model_new = Network_Multi_Path(self._num_classes, self._layers, self._criterion, self._Fch).cuda()
+        model_new = Network_Multi_Path(self._num_classes, self._layers, self._criterion, self._Fch, width_mult_list=self._width_mult_list, prun_modes=self._prun_modes, stem_head_width=self._stem_head_width).cuda()
         for x, y in zip(model_new.arch_parameters(), self.arch_parameters()):
                 x.data.copy_(y.data)
         return model_new
@@ -326,13 +326,11 @@ class Network_Multi_Path(nn.Module):
                         out0, down0 = cell(out_prev[j-1][1], alpha, ratio)
                         out.append((out0, down0))
                     else:
-                        if betas[j][i-j-1][0] > 0:
-                            out0, down0 = cell(out_prev[j-1][1], alpha, ratio)
-                        if betas[j][i-j-1][1] > 0:
-                            out1, down1 = cell(out_prev[j][0], alpha, ratio)
+                        out0, down0 = cell(out_prev[j-1][1], alpha, ratio)
+                        out1, down1 = cell(out_prev[j][0], alpha, ratio)
                         out.append((
                             sum(w * out for w, out in zip(betas[j][i-j-1], [out0, out1])),
-                            sum(w * down if down is not None else 0 for w, down in zip(betas[j][i-j-1], [down0, down1])),
+                            sum(w * down if down is not None else torch.tensor(0) for w, down in zip(betas[j][i-j-1], [down0, down1])),
                             ))
             out_prev = out
         ###################################
@@ -548,3 +546,6 @@ class Network_Multi_Path(nn.Module):
         getattr(self, self._arch_names[idx]["ratios"][0]).data = Variable(1e-3*torch.ones(self._layers-1, num_widths), requires_grad=True)
         getattr(self, self._arch_names[idx]["ratios"][1]).data = Variable(1e-3*torch.ones(self._layers-1, num_widths), requires_grad=True)
         getattr(self, self._arch_names[idx]["ratios"][2]).data = Variable(1e-3*torch.ones(self._layers-2, num_widths), requires_grad=True)
+        
+    def arch_parameters(self):
+        return self._arch_parameters[0]
